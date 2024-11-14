@@ -445,7 +445,38 @@
   <entry>
     <title>pwn工具1 pwntools模块</title>
     <url>/2024/11/14/ctfpwn/tools/pwn%E5%B7%A5%E5%85%B71-pwntools%E6%A8%A1%E5%9D%97/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><ul>
+<li><code>pwntools</code>的安装</li>
+<li><code>pwntools</code>的组件</li>
+</ul>
+<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><h2 id="pwntools的安装"><a href="#pwntools的安装" class="headerlink" title="pwntools的安装"></a><code>pwntools</code>的安装</h2><p><code>pwntools</code>是基于python的一个包，我们可以用<code>pip install</code>来安装这个包。</p>
+<p>坑：在 Manjaro 22、Ubuntu 23.04、Fedora 38等最新的linux发行版中运行<code>pip install</code>时，通常会收到一个错误提示：<code>error: externally-managed-environment</code>，即“外部管理环境”错误，但这不是一个 bug。</p>
+<p>解决办法：</p>
+<ol>
+<li>直接去除警告。<strong>缺点是包装多了可能会产生混乱</strong></li>
+<li>使用<code>pipx</code>，<strong>缺点是这个只适用于命令行，脚本中无法使用import引用包</strong></li>
+<li>使用<code>venv</code>创建虚拟环境。（我选择为pwn单独建一个环境）<ul>
+<li><code>apt install python3-venv</code></li>
+<li><code>python3 -m venv 目录</code>，该指令会在目录中创建一个python虚拟环境。</li>
+<li>进入虚拟环境所在的目录，使用<code>source bin/activate</code>来进入虚拟环境，然后<code>pip install</code>即可正常使用。</li>
+<li>关闭当前shell或使用<code>deactivate</code>即可退出虚拟环境。</li>
+</ul>
+</li>
+</ol>
+<p>总之大费周章最后终于装完了。</p>
+<h2 id="pwntools的组件"><a href="#pwntools的组件" class="headerlink" title="pwntools的组件"></a><code>pwntools</code>的组件</h2><p>命令行中输入<code>pwn</code>可以看到pwntools中包括的工具。<br><figure class="highlight text"><table><tr><td class="code"><pre><span class="line">asm,checksec,constgrep,cyclic,debug,disasm,disablenx,elfdiff,elfpatch,errno,hex,libcdb,phd,pwnstrip,scramble,shellcraft,template,unhex</span><br></pre></td></tr></table></figure></p>
+<h3 id="checksec工具"><a href="#checksec工具" class="headerlink" title="checksec工具"></a><code>checksec</code>工具</h3><a href="/2024/11/14/ctfpwn/tools/pwn%E7%9A%84%E5%B7%A5%E5%85%B73-%E7%9F%A5%E8%AF%86%E7%82%B91-checksec%E5%8F%8Aelf%E7%9A%84%E5%AE%89%E5%85%A8%E5%B1%9E%E6%80%A7/" title="pwn工具3&#x2F;知识点1 checksec及elf的安全属性">checksec介绍</a>
+<h3 id="cyclic工具"><a href="#cyclic工具" class="headerlink" title="cyclic工具"></a><code>cyclic</code>工具</h3><a href="/2024/11/12/ctfpwn/wp/ctfshow-pwn25-WP/" title="ctfshow-pwn25 WP">使用cyclic的实践</a>]]></content>
+      <categories>
+        <category>ctf</category>
+        <category>pwn</category>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>ctf</tag>
+        <tag>pwn</tag>
+        <tag>工具</tag>
+      </tags>
   </entry>
   <entry>
     <title>ctfshow-pwn25 WP</title>
