@@ -505,7 +505,7 @@
 <center>checksec的显示</center>
 
 <h2 id="elf的安全属性"><a href="#elf的安全属性" class="headerlink" title="elf的安全属性"></a>elf的安全属性</h2><h3 id="Arch"><a href="#Arch" class="headerlink" title="Arch"></a>Arch</h3><p>指的是编译环境或是编译器环境之类的。</p>
-<h3 id="RELRO"><a href="#RELRO" class="headerlink" title="RELRO"></a>RELRO</h3><h3 id="RELRO是什么"><a href="#RELRO是什么" class="headerlink" title="RELRO是什么"></a>RELRO是什么</h3><p>表示对是否有对数据区域的读写进行限制。</p>
+<h3 id="RELRO"><a href="#RELRO" class="headerlink" title="RELRO"></a>RELRO</h3><h4 id="RELRO介绍"><a href="#RELRO介绍" class="headerlink" title="RELRO介绍"></a>RELRO介绍</h4><p>表示对是否有对数据区域的读写进行限制。</p>
 <p>在Linux系统安全领域数据可以写的存储区就会是攻击的目标，尤其是存储函数指针的区域。所以在安全防护的角度来说尽量减少可写的存储区域对安全会有极大的好处。</p>
 <p><strong>设置符号重定向表格为只读或在程序启动时就解析并绑定所有动态符号，从而减少对<code>GOT(Global Offset Table)</code>攻击。</strong>（具体看RELRO类型）</p>
 <h4 id="RELRO类型"><a href="#RELRO类型" class="headerlink" title="RELRO类型"></a>RELRO类型</h4><p>类型有三种：</p>
