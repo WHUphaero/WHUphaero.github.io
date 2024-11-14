@@ -427,7 +427,9 @@
 <li><a href="/2024/11/14/ctfpwn/tools/pwn%E5%B7%A5%E5%85%B71-pwntools%E6%A8%A1%E5%9D%97/" title="pwn工具1 pwntools模块">pwntools</a>
 </li>
 </ul>
-<h2 id="计算机指令系统"><a href="#计算机指令系统" class="headerlink" title="计算机指令系统"></a>计算机指令系统</h2><h3 id="指令寻址"><a href="#指令寻址" class="headerlink" title="指令寻址"></a>指令寻址</h3><p>作者：<a href="https://www.zhihu.com/people/chen-hao-dong-34-27">鸫鸫鹅</a>：<a href="https://zhuanlan.zhihu.com/p/370204019">关于寻址方式一篇就够了</a></p>
+<h2 id="计算机指令系统"><a href="#计算机指令系统" class="headerlink" title="计算机指令系统"></a>计算机指令系统</h2><h3 id="指令寻址"><a href="#指令寻址" class="headerlink" title="指令寻址"></a>指令寻址</h3><ul>
+<li><a href="https://www.zhihu.com/people/chen-hao-dong-34-27">鸫鸫鹅（知乎）</a>：<a href="https://zhuanlan.zhihu.com/p/370204019">关于寻址方式一篇就够了</a></li>
+</ul>
 <h2 id="栈溢出"><a href="#栈溢出" class="headerlink" title="栈溢出"></a>栈溢出</h2><h3 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h3><h4 id="plt表与got表及elf的安全属性"><a href="#plt表与got表及elf的安全属性" class="headerlink" title="plt表与got表及elf的安全属性"></a>plt表与got表及elf的安全属性</h4><ul>
 <li><a href="/2024/11/13/transship/%E8%BD%AC%E8%BD%BD0001-plt%E8%A1%A8%E5%92%8Cgot%E8%A1%A81/" title="转载0001 plt表和got表1">转载0001-plt表和got表1</a></li>
 <li><a href="/2024/11/13/transship/%E8%BD%AC%E8%BD%BD0002-plt%E8%A1%A8%E5%92%8Cgot%E8%A1%A82/" title="转载0002 plt表和got表2">转载0002-plt表和got表2</a></li>
@@ -441,8 +443,17 @@
 <li><a href="/2024/11/14/ctfpwn/knowledge/pwn%E7%9F%A5%E8%AF%86%E7%82%B92-ASLR-PIE%E5%92%8CPIC%E7%9A%84%E5%BC%82%E5%90%8C/" title="pwn知识点2 ASLR,PIE和PIC的异同">ASLR、PIE和PIC的异同</a>
 </li>
 </ul>
-<h4 id="函数调用与栈基本知识"><a href="#函数调用与栈基本知识" class="headerlink" title="函数调用与栈基本知识"></a>函数调用与栈基本知识</h4><p>作者：<a href="https://www.zhihu.com/people/Jwizard">Jwizard</a>：<a href="https://zhuanlan.zhihu.com/p/25816426">手把手教你栈溢出从入门到放弃（上）</a></p>
-<h3 id="ret2libc"><a href="#ret2libc" class="headerlink" title="ret2libc"></a>ret2libc</h3><a href="/2024/11/12/ctfpwn/wp/ctfshow-pwn25-WP/" title="ctfshow-pwn25 WP">自己做ctfshow上ret2libc题的WP</a>]]></content>
+<h4 id="函数调用与栈基本知识"><a href="#函数调用与栈基本知识" class="headerlink" title="函数调用与栈基本知识"></a>函数调用与栈基本知识</h4><ul>
+<li><a href="https://www.zhihu.com/people/Jwizard">Jwizard（知乎）</a>：<a href="https://zhuanlan.zhihu.com/p/25816426">手把手教你栈溢出从入门到放弃（上）</a></li>
+</ul>
+<h3 id="ret2text"><a href="#ret2text" class="headerlink" title="ret2text"></a>ret2text</h3><ul>
+<li><a href="/2024/11/14/ctfpwn/wp/ctfshow-pwn24-WP/" title="ctfshow-pwn24 WP">自己做ctfshow上ret2text题的WP</a>
+</li>
+</ul>
+<h3 id="ret2libc"><a href="#ret2libc" class="headerlink" title="ret2libc"></a>ret2libc</h3><ul>
+<li><a href="/2024/11/12/ctfpwn/wp/ctfshow-pwn25-WP/" title="ctfshow-pwn25 WP">自己做ctfshow上ret2libc题的WP</a></li>
+</ul>
+]]></content>
       <categories>
         <category>ctf</category>
         <category>pwn</category>
