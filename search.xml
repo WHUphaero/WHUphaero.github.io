@@ -492,7 +492,13 @@
 <h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>本文主要介绍：</p>
 <ul>
 <li>工具<code>checksec</code></li>
-<li>elf的安全属性</li>
+<li>elf的安全属性<ul>
+<li><code>RELRO</code></li>
+<li><code>NX(DEP)</code></li>
+<li><code>Stack Canary</code></li>
+<li><code>PIE(ASLR)</code></li>
+</ul>
+</li>
 </ul>
 <h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><h2 id="工具checksec"><a href="#工具checksec" class="headerlink" title="工具checksec"></a>工具<code>checksec</code></h2><h3 id="安装checksec"><a href="#安装checksec" class="headerlink" title="安装checksec"></a>安装<code>checksec</code></h3><p><code>checksec</code>可以独立安装，但是<code>pwntools</code>已经将其打包了，其中集成了大量pwn手用的工具，所以我们直接安装<code>pwntools</code>即可</p>
 <h3 id="工具checksec的显示"><a href="#工具checksec的显示" class="headerlink" title="工具checksec的显示"></a>工具<code>checksec</code>的显示</h3><p><img src="/image/post/ctf/pwn/tools/003/1.png" alt=""></p>
