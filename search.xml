@@ -951,4 +951,59 @@
         <tag>算法</tag>
       </tags>
   </entry>
+  <entry>
+    <title>线性代数知识点</title>
+    <url>/2025/01/06/%E6%9D%82/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>大一上就给我上强度，真是。</p>
+<p>线代真是杂得很。<del>和高数真是完全不一样的风情。</del></p>
+<hr>
+<p>以下是正文：</p>
+<h1 id="1-行列式"><a href="#1-行列式" class="headerlink" title="1 行列式"></a>1 行列式</h1><h2 id="1-1-排列"><a href="#1-1-排列" class="headerlink" title="1.1 排列"></a>1.1 排列</h2><h3 id="1-1-1-排列定义"><a href="#1-1-1-排列定义" class="headerlink" title="1.1.1 排列定义"></a>1.1.1 排列定义</h3><p>由自然数$1,2,\cdots,n$按一定次序排成的数组称为一个$n$<strong>元排列</strong>，记为$p_1 p_2 \cdots p_n$。</p>
+<h3 id="1-1-2-逆序数"><a href="#1-1-2-逆序数" class="headerlink" title="1.1.2 逆序数"></a>1.1.2 逆序数</h3><p>一个排列中，大的数在校的数前面有序对的个数，称为这个排列的<strong>逆序数</strong>，记作$\tau(a_1 a_2 \cdots a_n)$</p>
+<h3 id="1-1-3-奇偶排列"><a href="#1-1-3-奇偶排列" class="headerlink" title="1.1.3 奇偶排列"></a>1.1.3 奇偶排列</h3><p>逆序对为奇数的排列被称为<strong>奇排列</strong>，逆序对为偶数的排列被称为<strong>偶排列</strong>。</p>
+<h2 id="1-2-行列式的基础性质"><a href="#1-2-行列式的基础性质" class="headerlink" title="1.2 行列式的基础性质"></a>1.2 行列式的基础性质</h2><h3 id="1-2-1-2阶及3阶行列式的计算"><a href="#1-2-1-2阶及3阶行列式的计算" class="headerlink" title="1.2.1 2阶及3阶行列式的计算"></a>1.2.1 2阶及3阶行列式的计算</h3><p>略</p>
+<h3 id="1-2-2-n阶行列式的定义"><a href="#1-2-2-n阶行列式的定义" class="headerlink" title="1.2.2 n阶行列式的定义"></a>1.2.2 n阶行列式的定义</h3><p>$D=\left| a<em>{ij} \right|=det(a</em>{ij})=<br>\left|\begin{array}{cccc}<br>a<em>{11} &amp; a</em>{12} &amp; \cdots &amp; a<em>{1n}\<br>a</em>{21} &amp; a<em>{22} &amp; \cdots &amp; a</em>{2n}\<br>\vdots &amp; \vdots &amp; &amp; \vdots \<br>a<em>{n1} &amp; a</em>{n2} &amp; \cdots &amp; a<em>{nn}\<br>\end{array}\right|<br>= \sum\limits</em>{p<em>1 p_2 \cdots p_n} (-1)^{\tau(p_1 p_2 \cdots p_n)}a</em>{1p<em>1}a</em>{2p<em>2}\cdots a</em>{np_n}$</p>
+<h3 id="1-2-3-行列式的3种变形"><a href="#1-2-3-行列式的3种变形" class="headerlink" title="1.2.3 行列式的3种变形"></a>1.2.3 行列式的3种变形</h3><ul>
+<li>对换行列式的$i,j$两行（或列），记作$r_i\leftrightarrow r_j$（或$c_i\leftrightarrow c_j$）。</li>
+<li>从行列式的第$i$行（或列）提出公因子$k$，记作$r_i\div k$（或$c_i \div k$）。</li>
+<li>把行列式的第$j$行（或列）的$k$倍加到第$i$行（或列）上，记作$r_i+kr_j$（或$c_i+kc_j$）。</li>
+</ul>
+<h3 id="1-2-4-行列式的其他性质"><a href="#1-2-4-行列式的其他性质" class="headerlink" title="1.2.4 行列式的其他性质"></a>1.2.4 行列式的其他性质</h3><p>行列式转置后仍然不变。即$D=D^T$</p>
+<h3 id="1-2-5-特殊的行列式"><a href="#1-2-5-特殊的行列式" class="headerlink" title="1.2.5 特殊的行列式"></a>1.2.5 特殊的行列式</h3><h4 id="1-2-5-1-上、下三角行列式"><a href="#1-2-5-1-上、下三角行列式" class="headerlink" title="1.2.5.1 上、下三角行列式"></a>1.2.5.1 上、下三角行列式</h4><p>$\left|\begin{array}{cccc}<br>a<em>{11} &amp; a</em>{12} &amp; a<em>{13} &amp; \cdots &amp; a</em>{1n}\<br>0 &amp; a<em>{22} &amp; a</em>{23} &amp; \cdots &amp; a<em>{2n}\<br>0 &amp; 0 &amp; a</em>{33} &amp; \cdots &amp; a<em>{3n}\<br>\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \<br>0 &amp; 0 &amp; 0 &amp; \cdots &amp; a</em>{nn}\<br>\end{array}\right| =<br>\left|\begin{array}{cccc}<br>a<em>{11} &amp; 0 &amp; 0 &amp; \cdots &amp; 0\<br>a</em>{21} &amp; a<em>{22} &amp; 0 &amp; \cdots &amp; 0\<br>a</em>{31} &amp; a<em>{32} &amp; a</em>{33} &amp; \cdots &amp; 0\<br>\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \<br>a<em>{n1} &amp; a</em>{n2} &amp; a<em>{n3} &amp; \cdots &amp; a</em>{nn}\<br>\end{array}\right|<br>= \prod\limits<em>{i=1}^{n}a</em>{ii}<br>$</p>
+<h4 id="1-2-5-2-范德蒙德行列式"><a href="#1-2-5-2-范德蒙德行列式" class="headerlink" title="1.2.5.2 范德蒙德行列式"></a>1.2.5.2 范德蒙德行列式</h4><p>$\left|\begin{array}{cccc}<br>1 &amp; 1 &amp; 1 &amp; \cdots &amp; 1\<br>a<em>1 &amp; a_2 &amp; a_3 &amp; \cdots &amp; a_n\<br>a_1^2 &amp; a_2^2 &amp; a_3^2 &amp; \cdots &amp; a_n^2\<br>\vdots &amp; \vdots &amp; \vdots &amp; &amp; \vdots\<br>a_1^{n-1} &amp; a_2^{n-1} &amp; a_3^{n-1} &amp; \cdots &amp; a_n^{n-1}<br>\end{array}\right|<br>=\prod\limits</em>{1 \le i &lt; j \le n}(a_i-a_j)$</p>
+<h2 id="1-3-行列式的展开"><a href="#1-3-行列式的展开" class="headerlink" title="1.3 行列式的展开"></a>1.3 行列式的展开</h2><h3 id="1-3-1-行列式按单行（或列）展开"><a href="#1-3-1-行列式按单行（或列）展开" class="headerlink" title="1.3.1 行列式按单行（或列）展开"></a>1.3.1 行列式按单行（或列）展开</h3><h4 id="1-3-1-1-余子式和代数余子式"><a href="#1-3-1-1-余子式和代数余子式" class="headerlink" title="1.3.1.1 余子式和代数余子式"></a>1.3.1.1 余子式和代数余子式</h4><p>在$n$阶行列式$D$中，划去$a<em>{ij}$所在的第$i$行和第$j$列，余下的元素按原来的顺序构成一个$n-1$阶行列式，记作$M</em>{ij}$，称为元素$a_{ij}$的<strong>余子式</strong>。</p>
+<p>记$A<em>{ij}=(-1)^{i+j}M</em>{ij}$，称$A<em>{ij}$为元素$a</em>{ij}$的<strong>代数余子式</strong>。</p>
+<h4 id="1-3-1-2-行列式展开的定理"><a href="#1-3-1-2-行列式展开的定理" class="headerlink" title="1.3.1.2 行列式展开的定理"></a>1.3.1.2 行列式展开的定理</h4><p>按行展开：$D=\sum\limits<em>{i=1}^{n}a</em>{ik}A_{ik}$，其中$k=1,2,\cdots,n$。</p>
+<p>按列展开：$D=\sum\limits<em>{i=1}^{n}a</em>{ki}A_{ki}$，其中$k=1,2,\cdots,n$。</p>
+<h3 id="1-3-2-行列式多行多列展开（拉普拉斯定理）"><a href="#1-3-2-行列式多行多列展开（拉普拉斯定理）" class="headerlink" title="1.3.2 行列式多行多列展开（拉普拉斯定理）"></a>1.3.2 行列式多行多列展开（拉普拉斯定理）</h3><h4 id="1-3-2-1-更广义的余子式和代数余子式的定义"><a href="#1-3-2-1-更广义的余子式和代数余子式的定义" class="headerlink" title="1.3.2.1 更广义的余子式和代数余子式的定义"></a>1.3.2.1 更广义的余子式和代数余子式的定义</h4><ul>
+<li>$k$<strong>阶子式</strong>：在$n$阶行列式$D$中，任取$k$行$k$列，其交点处的$k^2$个元素按原来的相对位置构成一个$k$阶行列式$M$，称为行列式$D$的一个$k$<strong>阶子式</strong>。</li>
+<li>$k$<strong>阶子式的余子式</strong>：在$D$中划去取出该子式的对应的$k$行$k$列，剩下的$n-k$阶行列式$M^<em>$，称为$k$<em>*阶子式的余子式</em></em>。</li>
+<li>$k$<strong>阶子式的代数余子式</strong>：设<em>k</em>阶子式所在$D$中的行号与列号分别为$i_1,i_2,\cdots,i_k$和$j_1,j_2,\cdots,j_k$（<strong>tips:不是</strong>$k^2$<strong>个元素的行号和列号和</strong>），则$(-1)^{i_1+i_2+\cdots+i_k+j_1+j_2+\cdots+j_k}M^*$称为$M$的代数余子式。</li>
+</ul>
+<h4 id="1-3-2-2-拉普拉斯定理"><a href="#1-3-2-2-拉普拉斯定理" class="headerlink" title="1.3.2.2 拉普拉斯定理"></a>1.3.2.2 拉普拉斯定理</h4><p>先任选并选定$k$行（或列），再枚举所有$k$列（或行）的取法（即$n$中选$k$，共$C<em>n^k$种），对于这样选出的$C^k_n$个子式$M_1,M_2,\cdots,M</em>{C<em>n^k}$和$C_n^k$个对应的代数余子式$A_1,A_2,\cdots,A</em>{C<em>n^k}$有：<br>$D=\sum\limits^{C_n^k}</em>{i=1}M_iA_i$</p>
+<h4 id="1-3-2-3-特殊的多行多列展开"><a href="#1-3-2-3-特殊的多行多列展开" class="headerlink" title="1.3.2.3 特殊的多行多列展开"></a>1.3.2.3 特殊的多行多列展开</h4><p>$<br>\left|\begin{array}{cccc}<br>a<em>{11} &amp; \cdots &amp; a</em>{1n} &amp; 0 &amp; \cdots &amp; 0 \<br>\vdots &amp; &amp; \vdots &amp; \vdots &amp;  &amp; \vdots \<br>a<em>{n1} &amp; \cdots &amp; a</em>{n} &amp; 0 &amp; \cdots &amp; 0 \<br>c<em>{11} &amp; \cdots &amp; c</em>{1n} &amp; b<em>{11} &amp; \cdots &amp; b</em>{m1} \<br>\vdots &amp; &amp; \vdots &amp; \vdots &amp;  &amp; \vdots \<br>c<em>{m1} &amp; \cdots &amp; c</em>{mn} &amp; b<em>{m1} &amp; \cdots &amp; b</em>{mm}<br>\end{array} \right|=<br>\left|\begin{array}{cccc}<br>a<em>{11} &amp; \cdots &amp; a</em>{1n} \<br>\vdots &amp; &amp; \vdots \<br>a<em>{n1} &amp; \cdots &amp; a</em>{nn}<br>\end{array}\right|<br>\left|\begin{array}{cccc}<br>b<em>{11} &amp; \cdots &amp; b</em>{1m} \<br>\vdots &amp; &amp; \vdots \<br>b<em>{m1} &amp; \cdots &amp; b</em>{mm}<br>\end{array}\right|<br>$</p>
+<p>按后面分块矩阵的写法$det(\begin{matrix} A &amp; 0 \ C &amp; B\end{matrix})=det(A)det(B)$，$A,B$均为方阵。</p>
+<h2 id="1-4-行列式的计算"><a href="#1-4-行列式的计算" class="headerlink" title="1.4 行列式的计算"></a>1.4 行列式的计算</h2><ul>
+<li>2阶或3阶的直接算。</li>
+<li>先运用3种变形处理。</li>
+<li>综合运用：<ul>
+<li>行列式按行列展开降低阶数；</li>
+<li>化为上下三角行列式；</li>
+<li>化为范德蒙德行列式等已有结论的行列式。</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-5-行列式的应用（克拉默法则）"><a href="#1-5-行列式的应用（克拉默法则）" class="headerlink" title="1.5 行列式的应用（克拉默法则）"></a>1.5 行列式的应用（克拉默法则）</h2><p>设含有$n$个未知量$x<em>1,x_2,\cdots,x_n$的$n$个方程的线性方程组为：<br>$\begin{cases}<br>a</em>{11}x<em>1+a</em>{12}x<em>2+\cdots+a</em>{1n}x<em>n=b_1,\<br>a</em>{21}x<em>1+a</em>{22}x<em>2+\cdots+a</em>{2n}x<em>n=b_2,\<br>\cdots \cdots \cdots\<br>a</em>{n1}x<em>1+a</em>{n2}x<em>2+\cdots+a</em>{nn}x_n=b_n,\<br>\end{cases}$</p>
+<p>记其系数行列式为$D=\left|\begin{array}{cccc}<br>a<em>{11} &amp; a</em>{12} &amp; \cdots &amp; a<em>{1n}\<br>a</em>{21} &amp; a<em>{22} &amp; \cdots &amp; a</em>{2n}\<br>\vdots &amp; \vdots &amp; &amp; \vdots \<br>a<em>{n1} &amp; a</em>{n2} &amp; \cdots &amp; a_{nn}\<br>\end{array}\right|$</p>
+<p>若方程组的系数行列式$D\neq 0$则方程组有唯一解$x_1=\frac{D_1}{D},x_2=\frac{D_2}{D},\cdots,x_n=\frac{D_n}{D}$。</p>
+<p>其中$D<em>k=D=\left|\begin{array}{cccc}<br>a</em>{1,1} &amp;  \cdots &amp; a<em>{1,k-1} &amp; b_1 &amp; a</em>{1,k+1} &amp; \cdots &amp; a<em>{1, n}\<br>a</em>{2,1} &amp;  \cdots &amp; a<em>{2,k-1} &amp; b_2 &amp; a</em>{2,k+1} &amp; \cdots &amp; a<em>{2, n}\<br>\vdots &amp; &amp; \vdots &amp; \vdots &amp; \vdots &amp; &amp; \vdots \<br>a</em>{n,1} &amp;  \cdots &amp; a<em>{n,k-1} &amp; b_n &amp; a</em>{n,k+1} &amp; \cdots &amp; a_{n, n}<br>\end{array}\right|$</p>
+<p>这个法则在后面的线性方程组的学习中会更深入。</p>
+<h1 id="2-矩阵基础"><a href="#2-矩阵基础" class="headerlink" title="2 矩阵基础"></a>2 矩阵基础</h1><h2 id="2-1"><a href="#2-1" class="headerlink" title="2.1"></a>2.1</h2>]]></content>
+      <categories>
+        <category>线性代数</category>
+      </categories>
+      <tags>
+        <tag>线性代数</tag>
+      </tags>
+  </entry>
 </search>
