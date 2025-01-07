@@ -885,6 +885,7 @@ a_{m1} & a_{m2} & \cdots & a_{mn}\\
 <li>（向量组向量维数）部分无关，加长无关；加长相关，部分相关</li>
 <li>（向量组个数）部分相关，整体相关；整体无关，部分无关</li>
 </ul>
+<p><strong>tips:证线性无关可以从矩阵可逆等概念入手，当然，从定义出发也是一个好的选择</strong>。</p>
 <h3 id="4-1-3-相关性与线性组合关系"><a href="#4-1-3-相关性与线性组合关系" class="headerlink" title="4.1.3 相关性与线性组合关系"></a>4.1.3 相关性与线性组合关系</h3><ul>
 <li>向量组相关的充要条件使至少有1个向量可以由其余n-1个向量线性表示</li>
 <li>若$\alpha_1,\alpha_2,\cdots,\alpha_n$线性无关，而$\alpha_1,\alpha_2,\cdots,\alpha_n,\beta$线性相关，则$\beta$可以由$\alpha_1,\alpha_2,\cdots,\alpha_n$唯一线性表示。</li>
@@ -946,7 +947,12 @@ a_{m1} & a_{m2} & \cdots & a_{mn}\\
 <li>tips:与求向量极大线性无关组类似</li>
 <li>将矩阵用初等行变换化为行阶梯形矩阵，取行阶梯形矩阵非零行第一个非零元所在列（共$r(A)$个）。回到原矩阵，先去对应的$r(A)$列再任取$r(A)$行，找出原矩阵中最高阶非零子式</li>
 </ul>
-<h1 id="5-线性空间"><a href="#5-线性空间" class="headerlink" title="5 线性空间"></a>5 线性空间</h1><h2 id="5-1-向量空间"><a href="#5-1-向量空间" class="headerlink" title="5.1 向量空间"></a>5.1 向量空间</h2><ul>
+<h1 id="5-线性空间"><a href="#5-线性空间" class="headerlink" title="5 线性空间"></a>5 线性空间</h1><p>最常见的考点是</p>
+<ol>
+<li>基变换与坐标变换</li>
+<li>正交化、求标准正交基</li>
+</ol>
+<h2 id="5-1-向量空间"><a href="#5-1-向量空间" class="headerlink" title="5.1 向量空间"></a>5.1 向量空间</h2><ul>
 <li>$n$<strong>维向量</strong>：$n$个数$a_1,a_2,\cdots,a_n$组成的有序数组称为$n$<strong>维向量</strong>。<ul>
 <li>排成一行，称为$n$<strong>维行向量</strong></li>
 <li>排成一列，称为$n$<strong>维列向量</strong></li>
@@ -975,7 +981,316 @@ a_{m1} & a_{m2} & \cdots & a_{mn}\\
 </ul>
 </li>
 </ul>
-<h2 id="5-2-线性空间"><a href="#5-2-线性空间" class="headerlink" title="5.2 线性空间"></a>5.2 线性空间</h2><h2 id="5-3-线性空间中的基"><a href="#5-3-线性空间中的基" class="headerlink" title="5.3 线性空间中的基"></a>5.3 线性空间中的基</h2><h2 id="5-4-线性变换及其矩阵表示"><a href="#5-4-线性变换及其矩阵表示" class="headerlink" title="5.4 线性变换及其矩阵表示"></a>5.4 线性变换及其矩阵表示</h2><h2 id="5-5-内积空间"><a href="#5-5-内积空间" class="headerlink" title="5.5 内积空间"></a>5.5 内积空间</h2><h1 id="6-矩阵的特征值与二次型"><a href="#6-矩阵的特征值与二次型" class="headerlink" title="6 矩阵的特征值与二次型"></a>6 矩阵的特征值与二次型</h1>]]></content>
+<h2 id="5-2-线性空间"><a href="#5-2-线性空间" class="headerlink" title="5.2 线性空间"></a>5.2 线性空间</h2><p>现在推广向量空间，将其中的向量换成多项式、矩阵等东西，得到线性空间：</p>
+<ul>
+<li>设$V$是一个非空集合，$F$是一个数域。</li>
+<li>定义<strong>加法</strong>和<strong>数乘</strong>：<ul>
+<li>定义<strong>加法</strong>：对于$\forall x,y \in V$，存在<strong>唯一的</strong>$z$与它们对应，称为$x$和$y$的<strong>和</strong>，记为$z=x+y$。</li>
+<li>定义<strong>数乘</strong>：对于$\forall \lambda \in F, \forall x \in V$，存在<strong>唯一的</strong>$y$与它们对应，称为$\lambda$与$x$的<strong>数量乘积</strong>，记为$y=\lambda x$。</li>
+</ul>
+</li>
+<li>定义<strong>线性空间</strong>：<ul>
+<li>若$V$和$F$满足如下特点（其中$\lambda,\mu \in F, x,y,z\in V$）：<ul>
+<li>加法4点：<ul>
+<li>$x+y=y+x$</li>
+<li>$(x+y)+z=x+(y+z)$</li>
+<li>$\exist \theta \in V$，使得$\forall x \in V$，都有$x+\theta=x$。（将具有这个性质的元素$\theta$称为$V$的<strong>零元素</strong>，也记为$0$）</li>
+<li>$\forall x \in V, \exist y \in V$，使得$x+y=\theta$（$y$称为$x$的<strong>负元素</strong>，记为$-x$）</li>
+</ul>
+</li>
+<li>数乘2点：<ul>
+<li>$F$中必须有数$1$，使得$1x=x$</li>
+<li>$\lambda(\mu x)=(\lambda\mu)x$</li>
+</ul>
+</li>
+<li>数乘与加法结合2点：<ul>
+<li>$(\lambda+\mu)x=\lambda x+\mu x$</li>
+<li>$\lambda (x+y)=\lambda x + \lambda y$</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>则称$V$为数域$F$上的<strong>线性空间</strong>。</li>
+</ul>
+</li>
+<li>因为线性空间是向量空间$R^n$的推广，把线性空间仍称为<strong>向量空间</strong>，其中的元素仍称为<strong>向量</strong>。</li>
+<li>$F$中的数称为<strong>数</strong>或<strong>标量</strong>，$V$称为线性空间的<strong>基集</strong>。</li>
+</ul>
+<p>常见的线性空间的记号有：</p>
+<ul>
+<li>$F^n$：数域$F$上$n$维向量空间。<ul>
+<li>$R^n$：$n$维实向量空间。</li>
+<li>$C^n$：$n$维复向量空间。</li>
+</ul>
+</li>
+<li>$F^{m\times n}$：元素属于数域$F$的$m\times n$矩阵按矩阵的加法和数乘构成一个数域$F$上的线性空间。<ul>
+<li>$R^{m\times n}$：$m\times n$阶实矩阵空间。</li>
+<li>$C^{m\times n}$：$m\times n$阶复矩阵空间。</li>
+</ul>
+</li>
+<li>$F[x]$：数域$F$上全体一元多项式的集合按通常的多项式加法以及多项式数乘构成的数域$F$上的线性看空间。<ul>
+<li>$F[x]_n$：数域$F$上次数小于$n$的多项式（包含零多项式）的多项式空间。<ul>
+<li>$R[x]_n$：数域$R$上次数小于$n$的多项式空间。</li>
+<li>$C[x]_n$：数域$C$上次数小于$n$的多项式空间。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>线性空间的性质：</p>
+<ul>
+<li>零元素唯一</li>
+<li>负元素唯一，可以定义减法，以及定义减法与数乘结合的运算律</li>
+<li>对于$\alpha\in V,k\in F$，由$k\alpha=\theta$可得$k=0$或$\alpha=\theta$。</li>
+</ul>
+<h2 id="5-3-线性子空间"><a href="#5-3-线性子空间" class="headerlink" title="5.3 线性子空间"></a>5.3 线性子空间</h2><p>定义：</p>
+<ul>
+<li>设$S$是数域$F$上的线性空间$V$的一个非空子集，如果$S$对于$V$中定义的加法和数乘两种运算也构成数域$F$上的线性空间，则称$S$为$V$的一个<strong>线性子空间</strong>或<strong>子空间</strong></li>
+</ul>
+<p>线性子空间与齐次线性方程组：</p>
+<ul>
+<li>设$A\in F^{m\times n}$，则齐次线性方程组$Ax=0$的解集$S=\{ x \vert Ax=0 \}$是$F^n$的一个子空间，称为齐次线性方程组$Ax=0$的<strong>解空间</strong>。</li>
+<li>当$Ax=0$只有零解时，解空间只有零向量，这个解空间被称为<strong>零子空间</strong>。</li>
+<li>一般称零子空间和线性空间本身为$V$的<strong>平凡子空间</strong>，其他的子空间称为<strong>非平凡子空间</strong>。</li>
+</ul>
+<p>线性子空间有关的性质：</p>
+<ul>
+<li>子空间的等价：对于$S\subseteq V$，使得$S$成为$V$的子空间的充要条件时$S$关于$V$中定义的加法和数乘运算封闭。</li>
+<li>生成的子空间：对于$S\subseteq V$，$S$中一切向量的所有线性组合构成的集合$W=\{k_1\alpha_1+k_2\alpha_2+\cdots+k_m\alpha_m \vert \alpha_i \in S, i=1,2,\cdots,m \}$，是$V$包含$S$的最小的子空间。<br>此时，称$W$是$S$<strong>生成的子空间</strong>，或称$S$<strong>生成</strong>$W$。</li>
+<li>子空间的交：对于$V$的两个子空间$V_1,V_2$，它们的交集$V_1\cap V_2$是$V$的子空间。</li>
+<li>子空间的和；对于$V$的两个子空间$V_1,V_2$，定义它们的和$\{\alpha+\beta | \alpha \in V_1, \beta \in V_2 \}$，记作$V_1+V_2$。（<strong>tips：$V_1 \cup V_2$并不总是构成一个线性空间，所以这么定义是没用的</strong>）<br>并且，$V_1+V_2$是$V$的子空间。</li>
+</ul>
+<h2 id="5-4-线性空间中的基和坐标"><a href="#5-4-线性空间中的基和坐标" class="headerlink" title="5.4 线性空间中的基和坐标"></a>5.4 线性空间中的基和坐标</h2><p>个人理解：基和坐标是广义向量与狭义向量建立联系的工具。</p>
+<h3 id="5-4-1-相关定义"><a href="#5-4-1-相关定义" class="headerlink" title="5.4.1 相关定义"></a>5.4.1 相关定义</h3><ul>
+<li>扩大化的<strong>线性无关</strong>的定义：<ul>
+<li>设$V$是在数域$F$上的线性空间，$\alpha_1,\alpha_2,\cdots,\alpha_n$是$V$中的一组向量，若在$F$中存在一组不全为零的数$k_1,k_2,\cdots,k_n$，使得<br>$k_1\alpha_1+k_2\alpha_2+\cdots+k_n\alpha_n=0$，则称向量组线性相关，否则称向量组线性无关。</li>
+<li>省流：原本线性无关概念中的向量更抽象，原本在实数中任取数变为在$F$中取。</li>
+</ul>
+</li>
+<li><strong>基</strong>和<strong>维数</strong>的定义：<ul>
+<li>如果线性空间$V$中有$n$个线性无关的向量$\alpha_1,\alpha_2,\cdots,\alpha_n$，并且$V$中任意向量是$\alpha_1,\alpha_2,\cdots,\alpha_n$<br>的线性组合，那么称$\alpha_1,\alpha_2,\cdots,\alpha_n$为$V$的一组<strong>基</strong>。</li>
+<li>向量组的大小$n$称为$V$的<strong>维数</strong>，记为$dim V=n$，此时$V$被称为$n$维线性空间。</li>
+<li>如果在$V$中可以找到无限多个线性无关的向量，则称$V$为无限维空间。</li>
+</ul>
+</li>
+<li><strong>坐标</strong>的定义：<ul>
+<li>设$\alpha_1,\alpha_2,\cdots,\alpha_n$是线性空间$V$的一组基，对于$\forall \alpha \in V$，都可以被$\alpha_1,\alpha_2,\cdots,\alpha_n$<br>唯一线性表示：$\alpha=k_1\alpha_1+k_2\alpha_2+\cdots+k_n\alpha_n$。</li>
+<li>这组数$k_1,k_2,\cdots,k_n$是由基和向量唯一确定的，这组数就记为$\alpha$在$\alpha_1,\alpha_2,\cdots,\alpha_n$下的<strong>坐标</strong>，记为$(k_1,k_2,\cdots,k_n)^T$</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-4-2-基变换与坐标变换"><a href="#5-4-2-基变换与坐标变换" class="headerlink" title="5.4.2 基变换与坐标变换"></a>5.4.2 基变换与坐标变换</h3><h4 id="5-4-2-1-基变换"><a href="#5-4-2-1-基变换" class="headerlink" title="5.4.2.1 基变换"></a>5.4.2.1 基变换</h4><p>给定线性空间$V$的两组基$x_1,x_2,\cdots,x_n$和$y_1,y_2,\cdots,y_n$。</p>
+<p>由向量组线性表示的知识，知</p>
+<script type="math/tex; mode=display">\exist P=\begin{pmatrix}
+p_{11} & p_{12} & \cdots & p_{1n}\\
+p_{21} & p_{22} & \cdots & p_{2n}\\
+\vdots & \vdots & & \vdots \\
+p_{n1} & p_{n2} & \cdots & p_{nn}
+\end{pmatrix}</script><p>使</p>
+<script type="math/tex; mode=display">(y_1,y_2,\cdots,y_n)=(x_1,x_2,\cdots,x_n)P</script><p>记$P$为由基$x_1,x_2,\cdots,x_n$到基$y_1,y_2,\cdots,y_n$的<strong>过渡矩阵</strong></p>
+<p>性质：</p>
+<ul>
+<li>若$x_1,x_2,\cdots,x_n$是线性空间$V$的一组基，对于向量组$y_1,y_2,\cdots,y_n$满足：$(y_1,y_2,\cdots,y_n)=(x_1,x_2,\cdots,x_n)P$</li>
+<li>则$y_1,y_2,\cdots,y_n$是一组基$\iff P$是可逆矩阵。</li>
+</ul>
+<p><strong>方法tips：怎么求过渡矩阵呢？直接求$(x_1,x_2,\cdots,x_n)^{-1}$，再通过$P=(x_1,x_2,\cdots,x_n)^{-1}(y_1,y_2,\cdots,y_n)$得到过渡矩阵。</strong></p>
+<h4 id="5-4-2-2-坐标变换"><a href="#5-4-2-2-坐标变换" class="headerlink" title="5.4.2.2 坐标变换"></a>5.4.2.2 坐标变换</h4><ul>
+<li>线性空间$V$中，向量$\alpha$在两组基$x_1,x_2,\cdots,x_n$和$y_1,y_2,\cdots,y_n$下的表示分别为 $x=(a_1,a_2,\cdots,a_n)^T,y=(b_1,b_2,\cdots,b_n)^T$</li>
+<li>设基$x_1,x_2,\cdots,x_n$到基$y_1,y_2,\cdots,y_n$的过渡矩阵为$P$</li>
+<li>有$x=Py$或$y=P^{-1}x$</li>
+</ul>
+<h2 id="5-5-线性变换及其矩阵表示"><a href="#5-5-线性变换及其矩阵表示" class="headerlink" title="5.5 线性变换及其矩阵表示"></a>5.5 线性变换及其矩阵表示</h2><p><del>不怎么考，略了</del></p>
+<h2 id="5-6-内积空间"><a href="#5-6-内积空间" class="headerlink" title="5.6 内积空间"></a>5.6 内积空间</h2><h3 id="5-6-1-内积空间及其基本定义与性质"><a href="#5-6-1-内积空间及其基本定义与性质" class="headerlink" title="5.6.1 内积空间及其基本定义与性质"></a>5.6.1 内积空间及其基本定义与性质</h3><p>定义：</p>
+<ul>
+<li>定义抽象的<strong>内积</strong>：<ul>
+<li>$V$是$R$上的线性空间，对于$\alpha,\beta \in V$，定义内积运算使之对应于一个实数，记为$(\alpha,\beta)$。</li>
+<li>其满足下列条件（其中$\alpha,\beta,\gamma \in V, \lambda \in R$）：<ol>
+<li>$(\alpha,\beta)=(\beta,\alpha)$</li>
+<li>$(\lambda \alpha,\beta)=\lambda(\alpha,\beta)$</li>
+<li>$(\alpha+\beta,\gamma)=(\alpha,\gamma)+(\beta,\gamma)$</li>
+<li>$(\alpha,\alpha)\geq 0$，且$(\alpha,\alpha)=0$当且仅当$\alpha=0$</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>定义<strong>内积空间</strong>：定义了内积运算的实线性空间被称为<strong>内积空间</strong>或<strong>欧几里得空间</strong>。</li>
+<li><strong>$R^n$上的标准内积</strong>：即我们一般认识的内积。<ul>
+<li>在$R^n$中，对于$\alpha=(a_1,a_2,\cdots,a_n)^T,\beta=(b_1,b_2,\cdots,b_n)^T$规定</li>
+<li>$(\alpha,\beta)=\sum\limits_{k=1}^na_kb_k$</li>
+<li>也可以写为$(\alpha,\beta)=(\beta,\alpha)=\alpha^T\beta=\beta^T\alpha$</li>
+</ul>
+</li>
+<li>定义<strong>向量长度</strong>：向量的长度定义为$\vert\vert\alpha\vert\vert=\sqrt{(\alpha,\alpha)}$</li>
+<li>定义<strong>标准向量</strong>：长度为1的向量称为<strong>单位向量</strong>。</li>
+<li>定义<strong>向量间夹角</strong>：$&lt;\alpha,\beta&gt;=arccos\frac{(\alpha,\beta)}{\vert\vert\alpha\vert\vert\space\vert\vert\beta\vert\vert}$</li>
+<li>定义向量<strong>正交</strong>或<strong>垂直</strong>：若$&lt;\alpha,\beta&gt;=\frac{\pi}{2}$，则称$\alpha$与$\beta$<strong>垂直</strong>或<strong>正交</strong>，记为$\alpha\perp\beta$</li>
+</ul>
+<p>性质：</p>
+<ul>
+<li>$(\sum\limits_{i=1}^sx_i\alpha_i,\sum\limits_{j=1}^ty_i\beta_i)=\sum\limits_{i=1}^s\sum\limits_{j=1}^tx_iy_j(\alpha_i,\beta_j)$</li>
+<li>$\vert(\alpha,\beta)\vert\leq\vert\vert\alpha\vert\vert\space\vert\vert\beta\vert\vert$<ul>
+<li>证法：利用$(\alpha+t\beta,\alpha+t\beta)\geq 0$，使用一元二次方程判别式。</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-6-2-正交化与标准正交基"><a href="#5-6-2-正交化与标准正交基" class="headerlink" title="5.6.2 正交化与标准正交基"></a>5.6.2 正交化与标准正交基</h3><p>定义：</p>
+<ul>
+<li>定义<strong>正交向量组</strong>：内积空间$V$中的非零向量组两两正交，则称该向量组为<strong>正交向量组</strong>。</li>
+<li>定义<strong>标准正交向量组</strong>：在正交向量组的基础上，如果向量组内的每一个向量都是单位向量，则称该向量组为<strong>标准正交向量组</strong>。</li>
+<li>定义<strong>标准正交基</strong>；<ul>
+<li>设$V$为$n$维内积空间，对$\alpha_1,\alpha_2,\cdots,\alpha_n \in V$，若$(\alpha_i,\alpha_j)=\begin{cases}1,i=j \\ 0,i\neq j \end{cases}$，称$\alpha_1,\alpha_2,\cdots,\alpha_n$为$V$的一组<strong>标准正交基</strong>。</li>
+<li>标准正交基不唯一。</li>
+</ul>
+</li>
+</ul>
+<p><strong>施密特正交化方法</strong>：</p>
+<ul>
+<li>目标：有一组线性无关的$n$维向量$\alpha_1,\alpha_2,\cdots,\alpha_m(m\leq n)$，<br>求一个标准正交向量组$\eta_1,\eta_2,\cdots,\eta_n$，<br>使其满足$\forall i\leq m$，都有向量组$\alpha_1,\alpha_2,\cdots,\alpha_i$与$\eta_1,\eta_2,\cdots,\eta_i$等价。</li>
+<li>第一步：正交化：<ol>
+<li>$\beta_1=\alpha_1$</li>
+<li>$\beta_j=\alpha_j-\frac{(\alpha_j,\beta_1)}{(\beta_1,\beta_1)}\beta_1-\frac{(\alpha_j,\beta_2)}{(\beta_2,\beta_2)}\beta_2-\cdots-\frac{(\alpha_j,\beta_{j-1})}{(\beta_{j-1},\beta_{j-1})}\beta_{j-1}(j=2,3,\cdots,m)$</li>
+</ol>
+<ul>
+<li>有线性无关向量组$\alpha_1,\alpha_2,\cdots,\alpha_m$化为了正交向量组$\beta_1,\beta_2,\cdots,\beta_m$</li>
+</ul>
+</li>
+<li>第二步：单位化：<ul>
+<li>即取$\eta_j=\frac{\beta_j}{\vert\vert\beta_j\vert\vert},j=1,2,\cdots,m$</li>
+</ul>
+</li>
+</ul>
+<h1 id="6-矩阵的特征值与二次型"><a href="#6-矩阵的特征值与二次型" class="headerlink" title="6 矩阵的特征值与二次型"></a>6 矩阵的特征值与二次型</h1><h2 id="6-1-矩阵的特征值与特征向量"><a href="#6-1-矩阵的特征值与特征向量" class="headerlink" title="6.1 矩阵的特征值与特征向量"></a>6.1 矩阵的特征值与特征向量</h2><ul>
+<li><strong>特征值</strong>与<strong>特征向量</strong>定义：设$A$是$n$阶矩阵，若存在数$\lambda$和$n$维非零向量$x$，使$Ax=\lambda x$，称$\lambda$为矩阵$A$的<strong>特征值</strong>，称$x$使矩阵$A$对应于特征值$\lambda$的一个<strong>特征向量</strong>。</li>
+<li>$\vert\lambda E-A\vert$称为<strong>特征多项式</strong>，$\lambda E-A$称为<strong>特征矩阵</strong>，$\vert\lambda E-A\vert=0$称为<strong>特征方程</strong>。</li>
+</ul>
+<p>tips:特征向量是非零的，但是特征值可能为0。</p>
+<p>求解特征值与特征向量：（已知$n$阶矩阵$A=(a_{ij})$）</p>
+<ol>
+<li>特征值：求解特征方程$\vert\lambda E-A\vert=0$，从中解出$\lambda_1,\lambda_2,\cdots,\lambda_n$</li>
+<li>再代入不同的特征值$\lambda_i$，求出方程组$(\lambda E - A)x=0$的所有非零解，即$A$对应于$\lambda_i$的全部特征向量。</li>
+</ol>
+<p>特征值与特征向量的特点：（对于同一个$n$阶方阵，特征值为$\lambda_1,\lambda_2,\cdots,\lambda_m(m\leq n)$）</p>
+<ul>
+<li>一个特征向量不能对应于不同的特征值</li>
+<li>矩阵对应于不同特征值的特征向量是线性无关的</li>
+<li>$t$重特征值最多有$t$个线性无关的特征向量。</li>
+<li>$\lambda_1+\lambda_2+\cdots+\lambda_m=a_11+a_22+\cdots+a_nn=tr(A)$</li>
+<li>$\lambda_1\lambda_2\cdots\lambda_m=\vert A\vert$</li>
+<li>$A$与$A^T$的特征值相同</li>
+<li>若$\lambda$是方阵$A$的特征值，则$f(\lambda)$是$f(A)$的特征值，对应的特征向量不变。下面是例子<ul>
+<li>$k\lambda$是$kA$的特征值</li>
+<li>$\lambda^m$是$A^m$的特征值</li>
+<li>$A$可逆时，$\lambda^{-1}$是$A^{-1}$的特征值</li>
+<li>$\lambda^2 + 3\lambda+1$是$A^2+3A+1$的特征值</li>
+</ul>
+</li>
+</ul>
+<h2 id="6-2-矩阵可对角化的条件"><a href="#6-2-矩阵可对角化的条件" class="headerlink" title="6.2 矩阵可对角化的条件"></a>6.2 矩阵可对角化的条件</h2><h3 id="6-2-1-矩阵相似"><a href="#6-2-1-矩阵相似" class="headerlink" title="6.2.1 矩阵相似"></a>6.2.1 矩阵相似</h3><ul>
+<li>对于矩阵$A,b$，若存在可逆矩阵P使得$B=P^{-1}AP$，则称$A$与$B$<strong>相似</strong>（就是矩阵初等变换里的等价关系），记为$A\sim B$。</li>
+<li>相似的矩阵特征值相同，迹相同，秩相同，但特征值相同不能推出相似。</li>
+<li>相似有自反性、对称性和传递性。</li>
+<li>由$A\sim B$，得$A^T\sim B^T,kA\sim kB,A^m\sim B^m, f(A)\sim f(B)$，其中$f(x)$是多项式</li>
+<li>tips:相似矩阵得特征向量不同。</li>
+</ul>
+<h3 id="6-2-2-矩阵对角化得条件"><a href="#6-2-2-矩阵对角化得条件" class="headerlink" title="6.2.2 矩阵对角化得条件"></a>6.2.2 矩阵对角化得条件</h3><ul>
+<li>$n$阶矩阵$A$对角化得充要条件是$A$有$n$个线性无关的特征向量。</li>
+<li>若$n$阶矩阵$A$有$n$个特征值，则$A$可以对角化</li>
+<li>$A$可以对角化等价于$A$的每个多重特征值对应的特征方程都有该特征值重数个向量的基础解系。</li>
+</ul>
+<h3 id="6-2-3-可对角化矩阵的对角化方法"><a href="#6-2-3-可对角化矩阵的对角化方法" class="headerlink" title="6.2.3 可对角化矩阵的对角化方法"></a>6.2.3 可对角化矩阵的对角化方法</h3><p>有一个可对角化的矩阵$A$：</p>
+<ol>
+<li>求出全部的特征值</li>
+<li>对每一个特征值，解出对应特征方程的基础解系，得到n个线性无关的特征向量。</li>
+<li>对n个特征向量一起进行正交化、单位化。</li>
+<li>将这$n$个特征向量排成正交矩阵$P$，便有$P^{-1}AP=\Lambda$</li>
+</ol>
+<ul>
+<li>注：$\Lambda$中对角元的排列次序于$P$中列向量的排列次序相对应。</li>
+</ul>
+<h2 id="6-3-实对称矩阵的对角化"><a href="#6-3-实对称矩阵的对角化" class="headerlink" title="6.3 实对称矩阵的对角化"></a>6.3 实对称矩阵的对角化</h2><p>补充：正交矩阵是由单位正交基构成的矩阵，最重要的特点是$A^T=A^{-1}$</p>
+<ul>
+<li>实对称矩阵的特征值都为实数</li>
+<li>实对称矩阵对应于不同向量的特征向量是正交的</li>
+<li>实对称矩阵每一个多重特征值对应的特征方程都有该特征值重数个向量的基础解系。</li>
+<li>实对称矩阵一定能对角化</li>
+<li>实对称矩阵$A$对角化方法<ol>
+<li>求出全部的特征值</li>
+<li>对每一个特征值，解出对应特征方程的基础解系并进行正交化、单位化。最终得到$n$个两两正交的单位特征向量。</li>
+<li>将这$n$个特征向量排成正交矩阵$P$，便有$P^{-1}AP=\Lambda$</li>
+</ol>
+<ul>
+<li>注：$\Lambda$中对角元的排列次序于$P$中列向量的排列次序相对应。</li>
+</ul>
+</li>
+</ul>
+<h2 id="6-4-二次型及其标准形"><a href="#6-4-二次型及其标准形" class="headerlink" title="6.4 二次型及其标准形"></a>6.4 二次型及其标准形</h2><h3 id="6-4-1-二次型及其矩阵表示"><a href="#6-4-1-二次型及其矩阵表示" class="headerlink" title="6.4.1 二次型及其矩阵表示"></a>6.4.1 二次型及其矩阵表示</h3><p><strong>二次型</strong>就是含有$n$个变量$x_1,x_2,\cdots,x_n$二次齐次多项式，可以用如下形式表示：</p>
+<script type="math/tex; mode=display">f(x_1,x_2,\cdots,x_n)=x^TAx</script><p>其中：<br>$x=(x_1,x_2,\cdots,x_n)^T$，$A$为$n$阶方阵。</p>
+<p>为了方便和唯一性，约定$A$为对称矩阵。</p>
+<p>称$A$为<strong>二次型$f$的矩阵</strong>，$f$为<strong>对称矩阵$A$的二次型</strong>，对称矩阵$A$的秩称为<strong>二次型$f$的秩</strong>。</p>
+<h3 id="6-4-2-满秩、降秩线性变换"><a href="#6-4-2-满秩、降秩线性变换" class="headerlink" title="6.4.2 满秩、降秩线性变换"></a>6.4.2 满秩、降秩线性变换</h3><p>对于$x=(x_1,x_2,\cdots,x_n)^T,y=(y_1,y_2,\cdots,y_n)^T$间的线性变换$x=Cy$</p>
+<ul>
+<li>若$C$为可逆矩阵，则该线性变换称为<strong>满秩线性变换</strong>或<strong>可逆线性变换</strong>或<strong>非退化线性变换</strong></li>
+<li>若$C$不可逆，则该线性变换称为<strong>降秩线性变换</strong>或<strong>退化线性变换</strong></li>
+</ul>
+<h3 id="6-4-3-矩阵的合同"><a href="#6-4-3-矩阵的合同" class="headerlink" title="6.4.3 矩阵的合同"></a>6.4.3 矩阵的合同</h3><ul>
+<li>$A,B$均为$n$阶矩阵，若有可逆矩阵$C$使得$B=C^TAC$，则称矩阵$A,B$合同，记为$A\simeq B$</li>
+<li>若二次型$f=x^TAx$经过可逆线性变换$x=Cy$变为以$B=C^TAC$为矩阵的二次型$f=x^TBx$，即矩阵$B$与$A$合同。</li>
+</ul>
+<p>合同的性质：</p>
+<ul>
+<li>自反、对称、传递</li>
+<li>若$A\simeq B$，则$r(A) = r(B)$</li>
+<li>若$A\simeq B$且$A^T=A$，则$B^T=B$</li>
+<li>若$A^T=A$，一定存在$B=diag(\cdots)$，使得$A\simeq B$。</li>
+</ul>
+<h3 id="6-4-4-二次型的标准形"><a href="#6-4-4-二次型的标准形" class="headerlink" title="6.4.4 二次型的标准形"></a>6.4.4 二次型的标准形</h3><p>若能将二次型化为只有平方项的形式，则该形式被称为二次型的标准形。</p>
+<p>方法：</p>
+<ul>
+<li>配方法<ol>
+<li>若二次型中无平方项，作非退化线性变换</li>
+<li>先找到平方项，比如是$kx_i^2$，把含有$x_i$的乘积集中配到一个方里，再对剩下的变量同样进行，直到得到都为平方的式子，再通过非退化线性变换得到标准形。</li>
+</ol>
+</li>
+<li>正交变换法<ol>
+<li>即对二次型的矩阵进行对角化，因为二次型的矩阵是对称矩阵，所以一定可以对角化，且对角化中构造的是正交矩阵，该矩阵的逆等于该矩阵的转置，所以此时不仅是相似同时也是合同。</li>
+<li>所以像对实对称矩阵对角化一样操作即可，构造出来的正交矩阵同时作为线性变换的矩阵。</li>
+<li>优点：保证线性变化前后两个向量的长度是一样的。</li>
+</ol>
+</li>
+<li>初等变换法：<ol>
+<li>利用初等变换与初等矩阵的等价性。</li>
+<li>对$\begin{pmatrix}A \\ E \end{pmatrix}$整体进行初等列变换，同时只对$A$进行同样类型的初等行变换。即$\begin{pmatrix}A \\ E \end{pmatrix}\sim\begin{pmatrix}C^TAC \\ C \end{pmatrix}$</li>
+</ol>
+</li>
+</ul>
+<h3 id="6-4-5-惯性定理和二次型的规范形"><a href="#6-4-5-惯性定理和二次型的规范形" class="headerlink" title="6.4.5 惯性定理和二次型的规范形"></a>6.4.5 惯性定理和二次型的规范形</h3><p>惯性定理：无论对二次型进行怎样的满秩线性变换使之化为标准形，其中正平方项的个数和负平方项的个数都是始终不变的。</p>
+<p>其中，称正平方项的个数为正惯性指数，负平方项的个数为负惯性指数。</p>
+<p>二次型的规范形：将二次型的标准形的每个二次项前面的系数的绝对值变为1就是二次型的规范形了。</p>
+<h3 id="6-4-6-实二次型的正定性"><a href="#6-4-6-实二次型的正定性" class="headerlink" title="6.4.6 实二次型的正定性"></a>6.4.6 实二次型的正定性</h3><p>若二次型$f=x^TAx$，对于$\forall x\neq 0$，都有$f(x)&gt;0$，则称$f$为正定二次型。<br>同样的，也有负定二次型。</p>
+<p>二次型是正定二次型，则二次型的矩阵称为正定矩阵</p>
+<p>二次型是正定二次型（二次型的矩阵为正定矩阵）的充要条件为：</p>
+<ul>
+<li>定义：$\forall x \neq 0, f(x)&gt;0$恒成立</li>
+<li>$A$的正惯性指数为$n$</li>
+<li>存在可逆矩阵$P$，使$A=P^TP$，即$A\simeq E$</li>
+<li>$A$的特征值全为正数</li>
+<li>$A$的顺序主子式均大于0</li>
+</ul>
+<p>二次型是正定二次型，可以推出：</p>
+<ul>
+<li>$\vert A\vert &gt; 0$</li>
+<li>$a_{ii}&gt;0$</li>
+</ul>
+<p>半正定矩阵：$x^TAx\geq 0$，且存在$x\neq 0$使$x^TAX=0$。半负定矩阵类似。</p>
+<h1 id="7-杂的题型"><a href="#7-杂的题型" class="headerlink" title="7 杂的题型"></a>7 杂的题型</h1><ul>
+<li>求$A^n$<ol>
+<li>直接算$A^2,A^3,\cdots$找规律，并用数学归纳法证明</li>
+<li>若$A=kE+B,B^3=0$，则$A^n=(kE+B)^n$用二项式定理展开</li>
+<li>若$A=\beta\beta^T$,$\beta$是列向量，设$k=(\beta,\beta)=\beta^T\beta$，则$A^n=k^{n-1}A$</li>
+</ol>
+</li>
+</ul>
+]]></content>
       <categories>
         <category>线性代数</category>
       </categories>
